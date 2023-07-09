@@ -2,7 +2,9 @@ import os
 import streamlit as st
 from functions import *
 
-openai.api_key = "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"
+# openai.api_key = "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"
+
+openai.api_key = os.getenv("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")
 
 
 # Replace "OPENAI_API_KEY" with the name of your environment variable
