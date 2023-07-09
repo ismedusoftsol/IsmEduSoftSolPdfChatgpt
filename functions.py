@@ -1,12 +1,10 @@
 import PyPDF2
 import json
 import uuid
-from sklearn.metrics.pairwise import cosine_similarity
-import time
+
 import numpy as np
 import openai
 from openai.embeddings_utils import get_embedding, cosine_similarity
-
 
 
 def learn_pdf(file_path):
@@ -21,6 +19,7 @@ def learn_pdf(file_path):
             "embedding": get_embedding(content, engine='text-embedding-ada-002')
         }
         content_chunks.append(obj)
+
     ## Save the learned data into the knowledge base...
     json_file_path = 'my_knowledgebase.json'
     with open(json_file_path, 'r', encoding='utf-8') as f:
@@ -56,23 +55,14 @@ def Answer_from_documents(user_query):
                         "given context.\n\nquery: {}".format(
                  context, user_query)}
         ]
+        response = openai.ChatCompletion.create(
+            model='gpt-3.5-turbo',
+            messages=myMessages,
+            max_tokens=200,
 
-        max_retries = 3
-        retry_delay = 5  # seconds
-        retries = 0
-        while retries < max_retries:
-            try:
-                response = openai.ChatCompletion.create(
-                    model='gpt-3.5-turbo',
-                    messages=myMessages,
-                    max_tokens=200
-                )
-                return response['choices'][0]['message']['content']
-            except openai.error.ServiceUnavailableError:
-                print("Server is overloaded. Retrying after a delay...")
-                time.sleep(retry_delay)
-                retries += 1
+        )
 
+    return response['choices'][0]['message']['content']
 
 
 def save_uploaded_file(uploaded_file):
