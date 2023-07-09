@@ -1,4 +1,4 @@
-
+import PyPDF2
 import json
 import uuid
 from sklearn.metrics.pairwise import cosine_similarity
@@ -6,7 +6,7 @@ import time
 import numpy as np
 import openai
 from openai.embeddings_utils import get_embedding, cosine_similarity
-import PyPDF2
+
 
 
 def learn_pdf(file_path):
