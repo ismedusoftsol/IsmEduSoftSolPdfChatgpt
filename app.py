@@ -10,7 +10,7 @@ openai.api_key = "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"
 # Replace "OPENAI_API_KEY" with the name of your environment variable
 
 def main():
-    st.title("ISMEDUSOFTSOL AI:LEGAL ")
+    st.title("ISMEDUSOFTSOL AI (LEGAL) ")
 
     uploaded_file = st.file_uploader("Choose a PDF file to upload", type="pdf")
     if uploaded_file is not None:
