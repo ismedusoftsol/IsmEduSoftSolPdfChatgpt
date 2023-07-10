@@ -26,7 +26,7 @@ def main():
         st.write("You:", user_input)
         response = Answer_from_documents(user_input)
         # st.text_input("Enter your Query:").empty()  # Clear the input field
-        st.write("Bot: " + response)
+        st.write("ISMBot: " + response)
 
 
 
